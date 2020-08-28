@@ -1,12 +1,19 @@
 package br.com.rafael.olamundo;
 
+import android.app.Dialog;
+import android.content.DialogInterface;
 import android.os.Bundle;
 import android.util.Log;
+import android.view.Gravity;
+import android.view.LayoutInflater;
 import android.view.View;
+import android.view.ViewGroup;
+import android.widget.Button;
 import android.widget.TextView;
+import android.widget.Toast;
 
+import androidx.appcompat.app.AlertDialog;
 import androidx.appcompat.app.AppCompatActivity;
-
 
 import java.util.ArrayList;
 
@@ -14,7 +21,7 @@ import br.com.rafael.dominio.Pessoa;
 import br.com.rafael.dominio.PessoaFisica;
 import br.com.rafael.dominio.PessoaJuridica;
 
-public class MainActivity extends AppCompatActivity
+public class MainActivity extends AppCompatActivity implements View.OnClickListener
 {
     private TextView textView;
     private int contador = 0;
@@ -58,11 +65,77 @@ public class MainActivity extends AppCompatActivity
                 listaPessoa.remove(0);
                 listaPessoa.remove(pessoa2);
 
-                for(Pessoa pessoaFor : listaPessoa)
+                for (Pessoa pessoaFor : listaPessoa)
                 {
                     Log.d("BARÃO", pessoaFor.getNome());
                 }
             }
         });
+        //
+        Button btDialog = findViewById(R.id.btDialog);
+        btDialog.setOnClickListener(this);
+        //
+        Button btToast = findViewById(R.id.btToast);
+        btToast.setOnClickListener(this);
+    }
+
+    @Override
+    public void onClick(View view)
+    {
+        switch (view.getId())
+        {
+            case R.id.btDialog:
+                abreaDialog();
+                break;
+            case R.id.btToast:
+                exibeToast("Testando o botão!");
+                break;
+        }
+    }
+
+    private void abreaDialog()
+    {
+        AlertDialog.Builder builder = new AlertDialog.Builder(this);
+        builder.setTitle("Título do Meu Dialog");
+        builder.setMessage("Ola, tudo bem com você?");
+        builder.setCancelable(false);
+        builder.setIcon(R.drawable.ic_baseline_perm_device_information_24);
+        builder.setPositiveButton("SIM", new DialogInterface.OnClickListener()
+        {
+            @Override
+            public void onClick(DialogInterface dialogInterface, int i)
+            {
+                exibeToast("Então ta bom!");
+            }
+        });
+        builder.setNegativeButton("NÃO", new DialogInterface.OnClickListener()
+        {
+            @Override
+            public void onClick(DialogInterface dialogInterface, int i)
+            {
+                exibeToast("Problema é seu!");
+            }
+        });
+        Dialog dialog = builder.create();
+        dialog.show();
+    }
+
+    private void exibeToast(String mensagemToast)
+    {
+        //Responsável por interpretar um XML de layout e criar os objetos representados
+        LayoutInflater construtorLayout = getLayoutInflater();
+        View viewToast = construtorLayout.inflate(R.layout.toast_layout, (ViewGroup) findViewById(R.id.toast_root_layout));
+        TextView textView = viewToast.findViewById(R.id.tvToast);
+        textView.setText(mensagemToast);
+        //
+        Toast toast = new Toast(this);
+        toast.setView(viewToast);
+        toast.setDuration(Toast.LENGTH_SHORT);
+        toast.setGravity(Gravity.TOP, 0, 0);
+        toast.show();
+        //
+        //Toast padrão do Android
+        //Toast toast = Toast.makeText(this, mensagemToast, Toast.LENGTH_LONG);
+        //toast.show();
     }
 }
