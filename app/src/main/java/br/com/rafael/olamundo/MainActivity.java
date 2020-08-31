@@ -2,6 +2,7 @@ package br.com.rafael.olamundo;
 
 import android.app.Dialog;
 import android.content.DialogInterface;
+import android.content.Intent;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.Gravity;
@@ -11,7 +12,6 @@ import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.TextView;
 import android.widget.Toast;
-
 
 import androidx.appcompat.app.AlertDialog;
 import androidx.appcompat.app.AppCompatActivity;
@@ -78,6 +78,9 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         //
         Button btToast = findViewById(R.id.btToast);
         btToast.setOnClickListener(this);
+        //
+        Button btNovaTela = findViewById(R.id.btNovaTela);
+        btNovaTela.setOnClickListener(this);
     }
 
     @Override
@@ -121,7 +124,16 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
             case R.id.btToast:
                 exibeToastPadrao("Testando o botão!");
                 break;
+            case R.id.btNovaTela:
+                abreNovaTelaSemEsperarResposta();
+                break;
         }
+    }
+
+    private void abreNovaTelaSemEsperarResposta()
+    {
+        Intent novaTela = new Intent(this, PrimeiraActivity.class);
+        startActivity(novaTela);
     }
 
     private void abreaDialog()
