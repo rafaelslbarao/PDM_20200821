@@ -12,6 +12,7 @@ import android.widget.Button;
 import android.widget.TextView;
 import android.widget.Toast;
 
+
 import androidx.appcompat.app.AlertDialog;
 import androidx.appcompat.app.AppCompatActivity;
 
@@ -80,6 +81,36 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
     }
 
     @Override
+    protected void onStart()
+    {
+        super.onStart();
+    }
+
+    @Override
+    protected void onResume()
+    {
+        super.onResume();
+    }
+
+    @Override
+    protected void onPause()
+    {
+        super.onPause();
+    }
+
+    @Override
+    protected void onStop()
+    {
+        super.onStop();
+    }
+
+    @Override
+    protected void onDestroy()
+    {
+        super.onDestroy();
+    }
+
+    @Override
     public void onClick(View view)
     {
         switch (view.getId())
@@ -88,7 +119,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
                 abreaDialog();
                 break;
             case R.id.btToast:
-                exibeToast("Testando o botão!");
+                exibeToastPadrao("Testando o botão!");
                 break;
         }
     }
@@ -105,7 +136,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
             @Override
             public void onClick(DialogInterface dialogInterface, int i)
             {
-                exibeToast("Então ta bom!");
+                exibeToastCustomizado("Então ta bom!");
             }
         });
         builder.setNegativeButton("NÃO", new DialogInterface.OnClickListener()
@@ -113,14 +144,20 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
             @Override
             public void onClick(DialogInterface dialogInterface, int i)
             {
-                exibeToast("Problema é seu!");
+                exibeToastCustomizado("Problema é seu!");
             }
         });
         Dialog dialog = builder.create();
         dialog.show();
     }
 
-    private void exibeToast(String mensagemToast)
+    private void exibeToastPadrao(String mensagemToast)
+    {
+        Toast toast = Toast.makeText(this, mensagemToast, Toast.LENGTH_LONG);
+        toast.show();
+    }
+
+    private void exibeToastCustomizado(String mensagemToast)
     {
         //Responsável por interpretar um XML de layout e criar os objetos representados
         LayoutInflater construtorLayout = getLayoutInflater();
@@ -133,9 +170,5 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         toast.setDuration(Toast.LENGTH_SHORT);
         toast.setGravity(Gravity.TOP, 0, 0);
         toast.show();
-        //
-        //Toast padrão do Android
-        //Toast toast = Toast.makeText(this, mensagemToast, Toast.LENGTH_LONG);
-        //toast.show();
     }
 }
