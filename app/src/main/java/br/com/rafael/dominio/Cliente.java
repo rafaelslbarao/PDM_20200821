@@ -9,6 +9,7 @@ public class Cliente implements Serializable
     private String nome;
     private Double latitude;
     private Double longitude;
+    private Boolean confirmado;
 
     public Long getCodigo()
     {
@@ -58,6 +59,16 @@ public class Cliente implements Serializable
     public void setLongitude(Double longitude)
     {
         this.longitude = longitude;
+    }
+
+    public Boolean getConfirmado()
+    {
+        return confirmado;
+    }
+
+    public void setConfirmado(Boolean confirmado)
+    {
+        this.confirmado = confirmado;
     }
 }
 

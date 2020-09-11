@@ -18,6 +18,7 @@ public class PrimeiraActivity extends AppCompatActivity implements View.OnClickL
     private EditText etEmail;
     private Button btSalvar;
     //
+    private Cliente cliente;
 
     @Override
     protected void onCreate(Bundle savedInstanceState)
@@ -29,14 +30,17 @@ public class PrimeiraActivity extends AppCompatActivity implements View.OnClickL
     }
 
     @Override
-    protected void onActivityResult(int requestCode, int resultCode, @Nullable Intent data)
+    protected void onActivityResult(int requestCode, int resultCode, @Nullable Intent intentResultado)
     {
-        super.onActivityResult(requestCode, resultCode, data);
+        super.onActivityResult(requestCode, resultCode, intentResultado);
         switch (requestCode)
         {
             case NomeParametros.REQUEST_CODE_SEGUNDA_TELA:
                 if(resultCode == RESULT_OK)
                 {
+                    Cliente clienteResultado = (Cliente) intentResultado.getSerializableExtra(NomeParametros.CLIENTE);
+                    this.cliente = clienteResultado;
+                    exibeToastPadrao("Cliente cadastrado e o valor da confirmação é " + cliente.getConfirmado());
                     finish();
                 }
                 else if(resultCode == RESULT_CANCELED)
@@ -85,9 +89,10 @@ public class PrimeiraActivity extends AppCompatActivity implements View.OnClickL
         intentSegundaTelaConfirmacao.putExtra(NomeParametros.CODIGO, etCodigo.getText().toString());
         intentSegundaTelaConfirmacao.putExtra(NomeParametros.EMAIL, etEmail.getText().toString());
         //Passagem de objeto de uma classe
-        Cliente cliente = new Cliente();
+        cliente = new Cliente();
         cliente.setCodigo(Long.valueOf(etCodigo.getText().toString()));
         cliente.setEmail(etEmail.getText().toString());
+        cliente.setConfirmado(false);
         intentSegundaTelaConfirmacao.putExtra(NomeParametros.CLIENTE, cliente);
         //
         //Chama uma nova tela sem esperar resultado
