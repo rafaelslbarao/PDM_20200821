@@ -6,6 +6,13 @@
     android:layout_height="match_parent"
     tools:context=".SegundaActivity">
 
+    <include layout="@layout/cabecalho"
+        app:layout_constraintTop_toTopOf="parent"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:id="@+id/cabec"
+        />
+
     <TextView
         android:id="@+id/tvCodigo"
         android:layout_width="wrap_content"
@@ -13,7 +20,7 @@
         android:text="E-mail"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
+        app:layout_constraintTop_toBottomOf="@id/cabec" />
 
     <TextView
         android:id="@+id/tvEmail"

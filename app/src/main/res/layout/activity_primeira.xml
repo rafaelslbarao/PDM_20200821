@@ -6,6 +6,14 @@
     android:layout_height="match_parent"
     tools:context=".PrimeiraActivity">
 
+    <include layout="@layout/cabecalho"
+        app:layout_constraintTop_toTopOf="parent"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:id="@+id/cabec"
+        />
+
+
     <EditText
         android:id="@+id/etCodigo"
         android:layout_width="wrap_content"
@@ -34,7 +42,7 @@
         android:text="Código"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
+        app:layout_constraintTop_toBottomOf="@id/cabec" />
 
     <TextView
         android:id="@+id/textView3"
@@ -47,9 +55,10 @@
 
     <Button
         android:id="@+id/btSalvar"
-        android:layout_width="wrap_content"
+        android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:text="Salvar"
+        android:layout_margin="20dp"
+        android:text="Salvar Teste"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent" />
